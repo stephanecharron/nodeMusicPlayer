@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="/modules/socket.io-client/dist/socket.io.js"></script>
+    <script src="http://wzrd.in/standalone/uuid%2Fv1@latest"></script>
+
+    <script>
+
+        var socket = io();
+
+        socket.emit('cmd', {
+            name: 'newPayer',
+            clientId: uuidv1()
+        });
+    </script>
+</head>
+<body>
+
+
+</body>
+</html>
