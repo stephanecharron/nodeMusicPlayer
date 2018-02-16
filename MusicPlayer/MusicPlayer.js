@@ -3,9 +3,6 @@ let timerUtil = new TimerUtil();
 let util = require('util');
 let Observer = require('../observer');
 let moment = require('moment');
-let winston = require('winston');
-
-
 
 function MusicPlayer() {
     Observer.call(this);
