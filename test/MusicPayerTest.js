@@ -16,6 +16,7 @@ describe("Music player", function () {
 
     beforeEach(function() {
         musicPlayer = new MusicPlayer();
+        musicPlayer.logger.info = new Function();
     });
 
     it("should be define", function () {
