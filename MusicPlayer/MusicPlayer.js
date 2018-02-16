@@ -3,6 +3,9 @@ let timerUtil = new TimerUtil();
 let util = require('util');
 let Observer = require('../observer');
 let moment = require('moment');
+let winston = require('winston');
+
+
 
 function MusicPlayer() {
     Observer.call(this);
@@ -11,17 +14,18 @@ function MusicPlayer() {
     this.currentTrack = undefined;
     this.on('trackEnded', this.next.bind(this));
     this.on('playListEnded', this.playListEnded.bind(this));
+    this.logger = console;
 }
 util.inherits(MusicPlayer, Observer);
 
 MusicPlayer.prototype.play = function () {
     this.currentTrack = this.playlist.songs[this.curser];
 
-    console.log(this.currentTrack, "playing");
+    this.logger.info((this.currentTrack.title + " is playing "+ this.currentTrack.length));
 
     (function (track, player) {
         player.timer = setTimeout(function () {
-            console.log(track, "ended");
+            player.logger.info(track.title + " ended");
             player.emit('trackEnded')
         }, timerUtil.getAppDuration(track.length));
         player.timeStarted = moment();
@@ -38,13 +42,13 @@ MusicPlayer.prototype.pause = function () {
     this.timePause = moment();
 };
 MusicPlayer.prototype.stop = function () {
-    console.log('player is stopped');
+    this.logger.info('player is stopped');
     clearTimeout(this.timer);
     this.curser = 0;
 };
 
 MusicPlayer.prototype.playListEnded = function () {
-    console.info(this.playlist.title, "has ended");
+    this.logger.info(this.playlist.title, "has ended");
 };
 
 MusicPlayer.prototype.next = function () {
