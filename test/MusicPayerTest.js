@@ -103,7 +103,7 @@ describe("Music player", function () {
             expect(musicPlayer.resume).not.to.be.undefined;
         });
 
-        it("should be defined", function () {
+        it("should not launch error on call", function () {
             musicPlayer.resume();
             expect(musicPlayer.resume).not.to.be.undefined;
         });
@@ -145,7 +145,7 @@ describe("Music player", function () {
             expect(musicPlayer.playListEnded).not.to.be.undefined;
         });
 
-        it("should be defined", function () {
+        it("should log info of ended playlist", function () {
             let consoleLogSpy = Sinon.spy(console, 'info')
             musicPlayer.loadPlayList(playlists[0].albums[0]);
             musicPlayer.playListEnded();
